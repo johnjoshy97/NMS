@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -17,4 +18,7 @@ public class Role {
 
     @Column(length = 60)
     private String name;
+
+//    @ManyToMany(mappedBy = "roles")
+//    private Set<User> users;
 }

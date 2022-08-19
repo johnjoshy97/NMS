@@ -1,9 +1,11 @@
 package com.example.Nintriva.Nintriva.security;
 
 
+
 import com.example.Nintriva.Nintriva.entity.Role;
 import com.example.Nintriva.Nintriva.entity.User;
 import com.example.Nintriva.Nintriva.repository.UserRepository;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,11 +28,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
-//        User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
-         User user = userRepository.findByUsername(usernameOrEmail)
+        User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with username or email:" + usernameOrEmail));
-
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
                 user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
@@ -38,6 +38,4 @@ public class CustomUserDetailsService implements UserDetailsService {
     private Collection< ? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
-
-
 }

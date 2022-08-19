@@ -1,7 +1,6 @@
 package com.example.Nintriva.Nintriva.repository;
 
 import com.example.Nintriva.Nintriva.entity.User;
-import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
