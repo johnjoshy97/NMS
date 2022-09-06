@@ -6,7 +6,12 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <include file="/changes/create_users_table.sql" relativeToChangelogFile="true"/>
+<<<<<<< HEAD
     <include file="/changes/insert_into_USER.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
 
 
+=======
+    <include file="/changes/roles.sql" relativeToChangelogFile="true"/>
+</databaseChangeLog>
+>>>>>>> e0825ed7cd9592bb3161b0ab99cd5b3dcff955fb

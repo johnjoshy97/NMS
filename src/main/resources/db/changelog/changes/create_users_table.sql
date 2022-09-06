@@ -1,6 +1,11 @@
 create table roles(
+<<<<<<< HEAD
  role_id int primary key,
  role_name varchar(20) not null
+=======
+ id int primary key,
+ name varchar(20) not null
+>>>>>>> e0825ed7cd9592bb3161b0ab99cd5b3dcff955fb
  );
 
 --    create table roles(
@@ -9,6 +14,7 @@ create table roles(
 --     FOREIGN KEY (id) REFERENCES users(id)
 -- );
 
+<<<<<<< HEAD
 create sequence user_id_sequence;
 --
 create table users (
@@ -26,5 +32,15 @@ create table users (
     role_id int,
     foreign key (user_id) references users(user_id),
     foreign key (role_id) references roles(role_id)
+=======
+
+create table users (
+    id int primary key ,
+    Name varchar(255) not null,
+    userame varchar(255) not null,
+    email varchar(255) not null,
+    password varchar(255) not null,
+     FOREIGN KEY (id) REFERENCES roles(id)
+>>>>>>> e0825ed7cd9592bb3161b0ab99cd5b3dcff955fb
     );
 
