@@ -3,11 +3,13 @@ package com.nintriva.repository.nms.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "users", uniqueConstraints = {
+@Table(name = "nms_users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"username"}),
         @UniqueConstraint(columnNames = {"email"})
 })
@@ -15,14 +17,18 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+    private UUID userid;
     private String username;
+    private String employee_code;
     private String email;
     private String password;
+    private String mobile;
+    private LocalDate date_time;
+
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
+            joinColumns = @JoinColumn(name = "userid", referencedColumnName = "userid"),
+            inverseJoinColumns = @JoinColumn(name = "roleid", referencedColumnName = "roleid"))
     private Set<Role> roles;
 }

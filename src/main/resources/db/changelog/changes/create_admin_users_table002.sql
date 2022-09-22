@@ -1,11 +1,16 @@
+
+--create sequence userid;
 create table nms_user_details(
-    user_id int,
-    employee_code varchar(100) not null primary key,
+    userid uuid primary key not null ,
+--    default nextval('userid_sequence'::regclass) ,
+--uuid varchar(20);
+--    userid int  ,
+    employee_Code varchar(100) not null,
     username varchar(100) not null,
     email varchar(20) not null ,
-    mobile int,
+    mobile varchar(20) not null ,
     date_format date,
-    joining_date date,
+    joining_Date date,
     timezone varchar(50),
     department varchar(100),
     last_name varchar(20),

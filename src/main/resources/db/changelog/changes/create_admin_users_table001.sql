@@ -5,3 +5,8 @@
 --    mobile int not null,
 --    date_time date
 --);
+
+--create table jes (name varchar(20),
+--age int );
+
+-- drop table jes;
