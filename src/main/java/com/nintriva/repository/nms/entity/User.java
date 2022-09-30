@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID userid;
     private String username;
-    private String employee_code;
+    private String employeeCode;
     private String email;
     private String password;
     private String mobile;

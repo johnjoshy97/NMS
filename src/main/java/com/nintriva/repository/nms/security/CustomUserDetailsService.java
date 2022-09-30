@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -16,9 +17,16 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    private String authServerUrl = "http://localhost:9090";
+    private String realm = "NMS-realm";
+    private String clientId = "nintriva";
+    private String role = "admin";
+    //Get client secret from the Keycloak admin console (in the credential tab)
+    private String clientSecret = "fEsv6SxscDLbN5JhYTRWKtg2hB7JryLD";
     private UserRepository userRepository;
 
     public CustomUserDetailsService(UserRepository userRepository) {

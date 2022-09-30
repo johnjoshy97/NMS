@@ -9,6 +9,12 @@ import com.nintriva.repository.nms.repository.RoleRepository;
 import com.nintriva.repository.nms.repository.UserDetailsRepository;
 import com.nintriva.repository.nms.repository.UserRepository;
 import com.nintriva.repository.nms.response.Response;
+import com.nintriva.repository.nms.security.CustomUserDetailsService;
+import org.hibernate.service.Service;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.keycloak.OAuth2Constants;
+import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.KeycloakBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +46,14 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private CustomUserDetailsService service;
+    private String authServerUrl = "http://localhost:9090";
+    private String clientId = "nintriva";
+    private String role = "admin";
+    //Get client secret from the Keycloak admin console (in the credential tab)
+    private String clientSecret = "fEsv6SxscDLbN5JhYTRWKtg2hB7JryLD";
+
     @PostMapping("/signin")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -60,7 +74,7 @@ public class AuthController {
         }
         // create user object
         User user = new User();
-        user.setEmployee_code(signUpDto.getEmployee_code());
+        user.setEmployeeCode(signUpDto.getEmployeeCode());
         user.setUsername(signUpDto.getUsername());
         user.setEmail(signUpDto.getEmail());
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
@@ -77,40 +91,57 @@ public class AuthController {
     public ResponseEntity<Response> registerUser(@RequestBody UserDetailsDto userDetailsDto) {
         try {
             // add check for username exists in a DB
-            if (userDetailsRepository.existsByUsername(userDetailsDto.getUsername())) {
-                Response response1 = Response.builder().success(false).message("Username is already taken!").build();
+//            if (userDetailsRepository.existsByUsername(userDetailsDto.getUsername())) {
+//                Response response1 = Response.builder().success(false).message("Username is already taken!").build();
+//                return new ResponseEntity<>(response1, HttpStatus.BAD_REQUEST);
+//            }
+            if (userDetailsRepository.existsByEmployeeCode(userDetailsDto.getEmployeeCode())) {
+                Response response1 = Response.builder().success(false).message("employee_code is already taken!").build();
                 return new ResponseEntity<>(response1, HttpStatus.BAD_REQUEST);
             }
-            // add check for email exists in DB
-            if (userDetailsRepository.existsByEmail(userDetailsDto.getEmail())) {
-                Response response2 = Response.builder().success(false).message("Email is already taken!").build();
+                // add check for email exists in DB
+                if (userDetailsRepository.existsByEmail(userDetailsDto.getEmail())) {
+                    Response response2 = Response.builder().success(false).message("Email is already taken!").build();
 
-                return new ResponseEntity<>(response2, HttpStatus.BAD_REQUEST);
-            }
-            UserDetails ud = new UserDetails();
-        ud.setUserid(UUID.randomUUID());
-            ud.setEmployee_code(userDetailsDto.getEmployee_code());
-            ud.setUsername(userDetailsDto.getUsername());
-            ud.setEmail(userDetailsDto.getEmail());
-            ud.setMobile(userDetailsDto.getMobile());
-            ud.setDate_format(LocalDate.now());
-            ud.setJoining_date(userDetailsDto.getJoining_date());
-            ud.setTimezone(userDetailsDto.getTimezone());
-            ud.setDepartment(userDetailsDto.getDepartment());
-            ud.setLast_name(userDetailsDto.getLast_name());
-            ud.setManager(userDetailsDto.getManager());
-            ud.setOffice(userDetailsDto.getOffice());
-            ud.setDate_of_birth(userDetailsDto.getDate_of_birth());
-            ud.setSalary_wages(userDetailsDto.getSalary_wages());
-            ud.setGender(userDetailsDto.getGender());
-            ud.setWeekly_working_hours(userDetailsDto.getWeekly_working_hours());
-            ud.setAadhar_number(userDetailsDto.getAadhar_number());
-            ud.setPAN_number(userDetailsDto.getPAN_number());
+                    return new ResponseEntity<>(response2, HttpStatus.BAD_REQUEST);
+                }
+            Keycloak keycloak = KeycloakBuilder.builder().serverUrl(authServerUrl)
+                    .grantType(OAuth2Constants.PASSWORD).realm("NMS-realm").clientId("nintriva")
+                    .username("jesna").password("jesna")
+                    .resteasyClient(new ResteasyClientBuilder().connectionPoolSize(10).build()).build();
 
-            userDetailsRepository.save(ud);
-            Response response3 = Response.builder().success(true).message("User created!").build();
+            keycloak.tokenManager().getAccessToken();
+                UserDetails ud = new UserDetails();
+                ud.setUserid(UUID.randomUUID());
 
-            return new ResponseEntity<>(response3, HttpStatus.OK);
+                ud.setEmployeeCode(userDetailsDto.getEmployeeCode());
+                ud.setFirst_name(userDetailsDto.getFirst_name());
+                ud.setLast_name(userDetailsDto.getLast_name());
+//                ud.setEmployee_code(userDetailsDto.getEmployee_code());
+                ud.setEmail(userDetailsDto.getEmail());
+                ud.setDate_of_birth(userDetailsDto.getDate_of_birth());
+                ud.setJoining_date(userDetailsDto.getJoining_date());
+                ud.setManager(userDetailsDto.getManager());
+                ud.setMobile(userDetailsDto.getMobile());
+                ud.setEmployee_address(userDetailsDto.getEmployee_address());
+                ud.setEmployment_type(userDetailsDto.getEmployment_type());
+                ud.setWork_status(userDetailsDto.getWork_status());
+                ud.setSalary(userDetailsDto.getSalary());
+                ud.setProbation_status(userDetailsDto.getProbation_status());
+                ud.setProbation_period(userDetailsDto.getProbation_period());
+                ud.setGender(userDetailsDto.getGender());
+                ud.setDesignation(userDetailsDto.getDesignation());
+                ud.setPAN_number(userDetailsDto.getPAN_number());
+                ud.setDaily_work_hour(userDetailsDto.getDaily_work_hour());
+                ud.setWeekly_work_hour(userDetailsDto.getWeekly_work_hour());
+                ud.setAadhar_number(userDetailsDto.getAadhar_number());
+                ud.setDepartment(userDetailsDto.getDepartment());
+
+                userDetailsRepository.save(ud);
+                Response response3 = Response.builder().success(true).message("User created!").build();
+
+                return new ResponseEntity<>(response3, HttpStatus.OK);
+
         }
         catch (Exception e){
             Response response4= Response.builder().success(false).message("Incomplete Field").build();

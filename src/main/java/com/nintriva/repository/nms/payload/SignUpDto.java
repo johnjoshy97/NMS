@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Data
 public class SignUpDto {
     private String name;
-    private String employee_code;
+    private String employeeCode;
     private String username;
     private String email;
     private String password;

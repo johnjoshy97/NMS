@@ -1,4 +1,4 @@
-create table nms_roles(
+       create table nms_roles(
  roleid int primary key,
  role_name varchar(20) not null
  );
@@ -8,7 +8,7 @@ create table nms_roles(
 create table nms_users (
     userid uuid primary key not null,
 --    default nextval('userid_sequence'::regclass) ,
-    employee_code varchar(50),
+    employeeCode varchar(50),
     username varchar(255) not null,
     email varchar(255) not null,
     password varchar(255) not null,
