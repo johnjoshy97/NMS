@@ -1,4 +1,4 @@
-package com.nintriva.repository.nms.response;
+package com.nintriva.nms.response;
 
 import lombok.Builder;
 import lombok.Data;

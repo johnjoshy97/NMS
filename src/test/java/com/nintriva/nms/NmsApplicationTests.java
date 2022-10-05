@@ -1,4 +1,4 @@
-package com.nintriva.repository.nms;
+package com.nintriva.nms;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

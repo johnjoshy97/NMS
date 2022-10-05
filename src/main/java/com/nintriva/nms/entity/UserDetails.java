@@ -1,8 +1,9 @@
-package com.nintriva.repository.nms.entity;
+package com.nintriva.nms.entity;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -27,24 +28,24 @@ public class UserDetails {
     private String employeeCode;
     @NotEmpty(message = "Email cannot be null")
     private String email;
-    private String mobile;
-    private Date date_of_birth;
-    private Date joining_date;
-    private String manager ;
-    private String employee_address ;
-    private String employment_type ;
-    private String work_status ;
-    private int salary;
-    private String probation_status ;
-    private String probation_period ;
-    private String gender;
-    private String designation;
-    private String PAN_number;
-    private String daily_work_hour;
-    private String weekly_work_hour;
-    private int aadhar_number;
+    @Nullable private String mobile;
+    @Nullable private Date date_of_birth;
+    @Nullable private Date joining_date;
+    @Nullable private String manager ;
+    @Nullable private String employee_address ;
+    @Nullable private String employment_type ;
+    @Nullable private String work_status ;
+    @Nullable private int salary;
+    @Nullable private String probation_status ;
+    @Nullable private String probation_period ;
+    @Nullable private String gender;
+    @Nullable private String designation;
+    @Nullable private String PAN_number;
+    @Nullable private String daily_work_hour;
+    @Nullable private String weekly_work_hour;
+    @Nullable private int aadhar_number;
     @NotEmpty(message = "Department cannot be null")
-    private String department;
+    @Nullable private String department;
 
 
 

@@ -1,9 +1,9 @@
-package com.nintriva.repository.nms.security;
+package com.nintriva.nms.security;
 
 
-import com.nintriva.repository.nms.entity.Role;
-import com.nintriva.repository.nms.repository.UserRepository;
-import com.nintriva.repository.nms.entity.User;
+import com.nintriva.nms.entity.Role;
+import com.nintriva.nms.entity.User;
+import com.nintriva.nms.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,7 +1,7 @@
-package com.nintriva.repository.nms.repository;
+package com.nintriva.nms.repository;
 
-import com.nintriva.repository.nms.entity.User;
-import com.nintriva.repository.nms.entity.UserDetails;
+import com.nintriva.nms.entity.User;
+import com.nintriva.nms.entity.UserDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

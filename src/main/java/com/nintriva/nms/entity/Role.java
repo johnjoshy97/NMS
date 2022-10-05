@@ -1,4 +1,4 @@
-package com.nintriva.repository.nms.entity;
+package com.nintriva.nms.entity;
 
 import lombok.Getter;
 import lombok.Setter;

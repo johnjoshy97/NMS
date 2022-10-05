@@ -1,6 +1,6 @@
-package com.nintriva.repository.nms.repository;
+package com.nintriva.nms.repository;
 
-import com.nintriva.repository.nms.entity.Role;
+import com.nintriva.nms.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {

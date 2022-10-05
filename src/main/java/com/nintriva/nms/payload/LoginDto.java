@@ -1,4 +1,4 @@
-package com.nintriva.repository.nms.payload;
+package com.nintriva.nms.payload;
 
 import lombok.Data;
 
