@@ -7,22 +7,15 @@
     import com.nintriva.nms.service.UserDetails;
     import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
     import org.keycloak.OAuth2Constants;
-    import org.keycloak.admin.client.CreatedResponseUtil;
     import org.keycloak.admin.client.Keycloak;
     import org.keycloak.admin.client.KeycloakBuilder;
     import org.keycloak.admin.client.resource.RealmResource;
-    import org.keycloak.admin.client.resource.UserResource;
     import org.keycloak.admin.client.resource.UsersResource;
-    import org.keycloak.representations.idm.CredentialRepresentation;
     import org.keycloak.representations.idm.UserRepresentation;
     import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.cache.Cache;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
     import org.springframework.stereotype.Service;
-
-    import javax.xml.bind.ValidationException;
-    import java.util.List;
     import java.util.UUID;
     @Service
 
@@ -53,6 +46,28 @@
 
                     return new ResponseEntity<>(response2, HttpStatus.BAD_REQUEST);
                 }
+                    if(userDetailsDto.getFirst_name()==null){
+                        Response response5 = Response.builder().success(false).message("First name cannot be empty").build();
+                        return new ResponseEntity<>(response5,HttpStatus.BAD_REQUEST);
+                    }
+                if(userDetailsDto.getLast_name()==null){
+                    Response response6 = Response.builder().success(false).message("Last name cannot be empty").build();
+                    return new ResponseEntity<>(response6,HttpStatus.BAD_REQUEST);
+                }
+                if(userDetailsDto.getEmail()==null){
+                    Response response7 = Response.builder().success(false).message("Email cannot be empty").build();
+                    return new ResponseEntity<>(response7,HttpStatus.BAD_REQUEST);
+                }
+                if(userDetailsDto.getEmployeeCode()==null){
+                    Response response8 = Response.builder().success(false).message("Employee code cannot be empty").build();
+                    return new ResponseEntity<>(response8,HttpStatus.BAD_REQUEST);
+                }
+                if(userDetailsDto.getDepartment()==null){
+                    Response response9 = Response.builder().success(false).message("Department cannot be empty").build();
+                    return new ResponseEntity<>(response9,HttpStatus.BAD_REQUEST);
+                }
+
+
                 Keycloak keycloak = KeycloakBuilder.builder().serverUrl(authServerUrl)
                         .grantType(OAuth2Constants.PASSWORD).realm("master").clientId("admin-cli")
                         .username("Admin").password("admin")
