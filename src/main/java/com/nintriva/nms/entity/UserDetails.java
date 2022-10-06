@@ -3,6 +3,7 @@ package com.nintriva.nms.entity;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -28,6 +29,8 @@ public class UserDetails {
     private String employeeCode;
     @NotEmpty(message = "Email cannot be null")
     private String email;
+    @NotEmpty(message = "Department cannot be null")
+    private String department;
     @Nullable private String mobile;
     @Nullable private Date date_of_birth;
     @Nullable private Date joining_date;
@@ -44,8 +47,7 @@ public class UserDetails {
     @Nullable private String daily_work_hour;
     @Nullable private String weekly_work_hour;
     @Nullable private int aadhar_number;
-    @NotEmpty(message = "Department cannot be null")
-    @Nullable private String department;
+
 
 
 

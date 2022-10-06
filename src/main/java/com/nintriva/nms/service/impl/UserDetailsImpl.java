@@ -2,19 +2,27 @@
 
     import com.nintriva.nms.payload.UserDetailsDto;
     import com.nintriva.nms.repository.UserDetailsRepository;
+    import com.nintriva.nms.repository.UserEntityRepository;
     import com.nintriva.nms.response.Response;
     import com.nintriva.nms.service.UserDetails;
     import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
     import org.keycloak.OAuth2Constants;
+    import org.keycloak.admin.client.CreatedResponseUtil;
     import org.keycloak.admin.client.Keycloak;
     import org.keycloak.admin.client.KeycloakBuilder;
     import org.keycloak.admin.client.resource.RealmResource;
+    import org.keycloak.admin.client.resource.UserResource;
     import org.keycloak.admin.client.resource.UsersResource;
+    import org.keycloak.representations.idm.CredentialRepresentation;
     import org.keycloak.representations.idm.UserRepresentation;
     import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.cache.Cache;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
     import org.springframework.stereotype.Service;
+
+    import javax.xml.bind.ValidationException;
+    import java.util.List;
     import java.util.UUID;
     @Service
 
@@ -22,6 +30,8 @@
 
     @Autowired
         UserDetailsRepository userDetailsRepository;
+    @Autowired
+    UserEntityRepository userEntityRepository;
         private String authServerUrl = "http://localhost:8080/auth/";
         private String clientId = "nintriva";
         private String role = "admin";
@@ -29,12 +39,10 @@
         private String clientSecret = "fEsv6SxscDLbN5JhYTRWKtg2hB7JryLD";
         @Override
         public ResponseEntity<Response> addEmployee(UserDetailsDto userDetailsDto) {
-    //        try {
-                // add check for username exists in a DB
-    //            if (userDetailsRepository.existsByUsername(userDetailsDto.getUsername())) {
-    //                Response response1 = Response.builder().success(false).message("Username is already taken!").build();
-    //                return new ResponseEntity<>(response1, HttpStatus.BAD_REQUEST);
-    //            }
+
+
+            try {
+
                 if (userDetailsRepository.existsByEmployeeCode(userDetailsDto.getEmployeeCode())) {
                     Response response1 = Response.builder().success(false).message("employee_code is already taken!").build();
                     return new ResponseEntity<>(response1, HttpStatus.BAD_REQUEST);
@@ -54,22 +62,24 @@
                 com.nintriva.nms.entity.UserDetails ud = new com.nintriva.nms.entity.UserDetails();
                 ud.setUserid(UUID.randomUUID());
 
-    //        UserRepresentation user = new UserRepresentation();
-    //        user.setEnabled(true);
-    //        user.setUsername(userDetailsDto.getEmail());
-    //        user.setFirstName(userDetailsDto.getFirst_name());
-    //        user.setLastName(userDetailsDto.getLast_name());
-    //        user.setEmail(userDetailsDto.getEmail());
-    //
-    //        RealmResource realmResource = keycloak.realm(realm);
-    //        UsersResource usersRessource = realmResource.users();
+                UserRepresentation user = new UserRepresentation();
+                user.setEnabled(true);
+                user.setUsername(userDetailsDto.getEmail());
+                user.setFirstName(userDetailsDto.getFirst_name());
+                user.setLastName(userDetailsDto.getLast_name());
+                user.setEmail(userDetailsDto.getEmail());
+//            userEntityRepository.save(user);
 
+                RealmResource realmResource = keycloak.realm("NMS-realm");
+                UsersResource usersResource = realmResource.users();
 
+                javax.ws.rs.core.Response response = usersResource.create(user);
+                userDetailsDto.setStatusCode(response.getStatus());
+                userDetailsDto.setStatus(response.getStatusInfo().toString());
 
-            ud.setEmployeeCode(userDetailsDto.getEmployeeCode());
+                ud.setEmployeeCode(userDetailsDto.getEmployeeCode());
                 ud.setFirst_name(userDetailsDto.getFirst_name());
                 ud.setLast_name(userDetailsDto.getLast_name());
-    //                ud.setEmployee_code(userDetailsDto.getEmployee_code());
                 ud.setEmail(userDetailsDto.getEmail());
                 ud.setDate_of_birth(userDetailsDto.getDate_of_birth());
                 ud.setJoining_date(userDetailsDto.getJoining_date());
@@ -94,12 +104,11 @@
 
                 return new ResponseEntity<>(response3, HttpStatus.OK);
 
-    //        }
-    //        catch (Exception e){
-    //            System.out.println(e);
-    //            Response response4= Response.builder().success(false).message("Incomplete Field").build();
-    //            return new ResponseEntity<>(response4, HttpStatus.OK);
+            } catch (Exception e) {
 
-    //        }
+                Response response4 = Response.builder().success(false).message("Incomplete Field").build();
+                return new ResponseEntity<>(response4, HttpStatus.OK);
+            }
+
         }
-        }
+    }
