@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
@@ -15,6 +17,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "nms_user_details")
+
 public class UserDetails {
     @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +32,8 @@ public class UserDetails {
     private String employeeCode;
     @NotEmpty(message = "Email cannot be null")
     private String email;
+//    @Email(regexp = ".+@.+\\..+")
+
     @NotEmpty(message = "Department cannot be null")
     private String department;
     @Nullable private String mobile;
@@ -47,6 +52,7 @@ public class UserDetails {
     @Nullable private String daily_work_hour;
     @Nullable private String weekly_work_hour;
     @Nullable private int aadhar_number;
+
 
 
 

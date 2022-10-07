@@ -24,5 +24,9 @@ create table nms_user_details(
   daily_work_hour varchar(100),
   weekly_work_hour varchar(100),
   aadhar_number int,
-  department varchar(100)
+  department varchar(100),
+  createdAt date,
+  uodatedAt date,
+  createdBy varchar(100),
+  updatedBy varchar(100)
 );

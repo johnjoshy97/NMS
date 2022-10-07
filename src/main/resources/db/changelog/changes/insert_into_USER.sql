@@ -1,2 +1,1 @@
---insert into nms_users(user_id, username , email,password)
---values (1 , 'jesna', 'jes@gmail.com', 'jes123');
+--ALTER TABLE nms_user_details DROP COLUMN createdAt ,createBy, updateAt,updateBy;
