@@ -30,9 +30,11 @@ public class UserDetails {
     private String last_name;
     @NotEmpty(message = "Employee code cannot be null")
     private String employeeCode;
-    @NotEmpty(message = "Email cannot be null")
+    @NotEmpty @Email(message = "invalid email id",
+
+            regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z(\\d)-]+\\.[a-zA-Z(\\d)-.]+$")
     private String email;
-//    @Email(regexp = ".+@.+\\..+")
+
 
     @NotEmpty(message = "Department cannot be null")
     private String department;
@@ -52,14 +54,6 @@ public class UserDetails {
     @Nullable private String daily_work_hour;
     @Nullable private String weekly_work_hour;
     @Nullable private int aadhar_number;
-
-
-
-
-
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "userid", referencedColumnName = "userid")
-//    private List<User> user;
 
 
 }

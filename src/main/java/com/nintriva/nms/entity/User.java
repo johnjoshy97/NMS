@@ -1,12 +1,18 @@
 package com.nintriva.nms.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "nms_users", uniqueConstraints = {
