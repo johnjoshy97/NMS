@@ -50,4 +50,6 @@ public class AuthController {
         //Create new user in keycloak
         return userDetails.addEmployee(userDetailsDto);
     }
+
+
 }

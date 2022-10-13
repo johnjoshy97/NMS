@@ -30,21 +30,22 @@
     public class UserDetailsImpl implements UserDetails {
 
         private final PasswordEncoder passwordEncoder;
-        private final UserDetailsRepository  userDetailsRepository;
+        private final UserDetailsRepository userDetailsRepository;
         private final UserRepository userRepository;
         private final RoleRepository roleRepository;
 
-    @Autowired
-    UserEntityRepository userEntityRepository;
+        @Autowired
+        UserEntityRepository userEntityRepository;
         private String authServerUrl = "http://localhost:8080/auth/";
         private String clientId = "nintriva";
         private String role = "admin";
         //Get client secret from the Keycloak admin console (in the credential tab)
         private String clientSecret = "fEsv6SxscDLbN5JhYTRWKtg2hB7JryLD";
+
         @Override
         public ResponseEntity<Response> addEmployee(UserDetailsDto userDetailsDto) {
-//
-//
+
+
             try {
 
                 if (userDetailsRepository.existsByEmployeeCode(userDetailsDto.getEmployeeCode())) {
@@ -91,7 +92,7 @@
 
                 UserRepresentation user = new UserRepresentation();
                 user.setEnabled(true);
-                
+
                 user.setUsername(userDetailsDto.getEmail());
                 user.setFirstName(userDetailsDto.getFirst_name());
                 user.setLastName(userDetailsDto.getLast_name());
@@ -143,7 +144,10 @@
                 return new ResponseEntity<>(response4, HttpStatus.OK);
             }
 
+//            return null;
         }
+
+
 
         @Override
         public ResponseEntity<?> employeeReg(SignUpDto signUpDto) {

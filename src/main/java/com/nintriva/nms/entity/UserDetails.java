@@ -30,9 +30,7 @@ public class UserDetails {
     private String last_name;
     @NotEmpty(message = "Employee code cannot be null")
     private String employeeCode;
-    @NotEmpty @Email(message = "invalid email id",
-
-            regexp = "^[a-zA-Z0-9_.+-]+@[a-zA-Z(\\d)-]+\\.[a-zA-Z(\\d)-.]+$")
+    @NotEmpty
     private String email;
 
 
