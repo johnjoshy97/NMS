@@ -9,10 +9,6 @@
 
     <include file="changes/create_admin_users_table002.sql" relativeToChangelogFile="true"/>
     <include file="changes/alter_user_details_table.sql" relativeToChangelogFile="true"/>
-    <include file="changes/create_dropdown_table.sql" relativeToChangelogFile="true"/>
-    <include file="changes/insert_into_Nms_select.sql" relativeToChangelogFile="true"/>
-<!--    <include file="changes/insert_into_USER.sql" relativeToChangelogFile="true"/>-->
-
 </databaseChangeLog>
 
 

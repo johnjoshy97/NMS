@@ -1,5 +1,6 @@
 package com.nintriva.nms.controller;
 
+import com.nintriva.nms.payload.ListOptionDto;
 import com.nintriva.nms.payload.LoginDto;
 import com.nintriva.nms.payload.SignUpDto;
 import com.nintriva.nms.payload.UserDetailsDto;
@@ -49,6 +50,10 @@ public class AuthController {
     public ResponseEntity<Response> registerUser(@RequestBody @Valid UserDetailsDto userDetailsDto) {
         //Create new user in keycloak
         return userDetails.addEmployee(userDetailsDto);
+    }
+
+    public  ResponseEntity<?> listOptions(@RequestBody ListOptionDto listOptionDto){
+        return select.
     }
 
 

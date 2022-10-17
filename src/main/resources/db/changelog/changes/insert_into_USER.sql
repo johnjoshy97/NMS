@@ -1,1 +1,1 @@
---ALTER TABLE nms_user_details DROP COLUMN createdAt ,createBy, updateAt,updateBy;
+--ALTER TABLE Nms_select ADD COLUMN createdAt, createBy, updateAt, updateBy;

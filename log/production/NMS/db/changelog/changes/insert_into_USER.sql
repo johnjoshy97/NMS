@@ -1,0 +1,1 @@
+--ALTER TABLE nms_user_details DROP COLUMN createdAt ,createBy, updateAt,updateBy;

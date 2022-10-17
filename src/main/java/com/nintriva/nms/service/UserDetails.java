@@ -8,6 +8,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface UserDetails {
     public ResponseEntity<Response> addEmployee(UserDetailsDto user) ;
-
-    ResponseEntity<?> employeeReg(SignUpDto signUpDto);
+            ResponseEntity<?> employeeReg(SignUpDto signUpDto);
 }

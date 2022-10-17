@@ -1,0 +1,3 @@
+--alter table nms_user_details add column createdAt Date ,add createBy varchar(100),
+-- add updateAt Date ,
+-- add updateBy varchar(100);
