@@ -3,7 +3,9 @@ package com.nintriva.nms.security;
 
 import com.nintriva.nms.entity.Role;
 import com.nintriva.nms.entity.User;
+import com.nintriva.nms.payload.ListOptionDto;
 import com.nintriva.nms.repository.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,4 +48,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toList());
     }
 
+//    public ResponseEntity<?> getlistOption(ListOptionDto listOptionDto) {
+//        return null;
+//    }
 }

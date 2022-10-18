@@ -12,7 +12,7 @@ public class Select {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private int Selectid;
-    private String Label;
-    private String Options;
+    private int selectId;
+    private String label;
+    private String options;
 }
