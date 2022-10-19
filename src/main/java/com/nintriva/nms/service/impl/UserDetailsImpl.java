@@ -1,12 +1,10 @@
     package com.nintriva.nms.service.impl;
 
+    import com.nintriva.nms.entity.Select;
     import com.nintriva.nms.entity.User;
     import com.nintriva.nms.payload.SignUpDto;
     import com.nintriva.nms.payload.UserDetailsDto;
-    import com.nintriva.nms.repository.RoleRepository;
-    import com.nintriva.nms.repository.UserDetailsRepository;
-    import com.nintriva.nms.repository.UserEntityRepository;
-    import com.nintriva.nms.repository.UserRepository;
+    import com.nintriva.nms.repository.*;
     import com.nintriva.nms.response.Response;
     import com.nintriva.nms.service.UserDetails;
     import lombok.RequiredArgsConstructor;
@@ -23,7 +21,7 @@
     import org.springframework.security.crypto.password.PasswordEncoder;
     import org.springframework.stereotype.Service;
 
-    import javax.validation.constraints.Email;
+    import java.util.List;
     import java.util.UUID;
     @Service
     @RequiredArgsConstructor
@@ -32,7 +30,7 @@
         private final PasswordEncoder passwordEncoder;
         private final UserDetailsRepository userDetailsRepository;
         private final UserRepository userRepository;
-        private final RoleRepository roleRepository;
+//        private final RoleRepository roleRepository;
 
         @Autowired
         UserEntityRepository userEntityRepository;
@@ -170,4 +168,6 @@
             return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
 
         }
+
+
     }

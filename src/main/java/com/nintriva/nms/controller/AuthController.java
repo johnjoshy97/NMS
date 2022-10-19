@@ -6,6 +6,8 @@ import com.nintriva.nms.payload.SignUpDto;
 import com.nintriva.nms.payload.UserDetailsDto;
 import com.nintriva.nms.response.Response;
 import com.nintriva.nms.security.CustomUserDetailsService;
+
+import com.nintriva.nms.service.ListOptionService;
 import com.nintriva.nms.service.UserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static liquibase.repackaged.net.sf.jsqlparser.parser.feature.Feature.select;
-
 
 @RestController
 @RequestMapping("/api/auth")
@@ -31,6 +31,8 @@ public class AuthController {
     private final CustomUserDetailsService service;
     private final UserDetails userDetails;
 
+    @Autowired
+    private ListOptionService listOptionService;
     @PostMapping("/signin")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -51,7 +53,12 @@ public class AuthController {
         return userDetails.addEmployee(userDetailsDto);
     }
 
+    @GetMapping(path = "/Listing")
+    public ResponseEntity<Response> insertOptions(@RequestBody ListOptionDto listOptionDto){
 
+        Response response = listOptionService.insertOption(listOptionDto);
 
+        return new  ResponseEntity<>(response,response.getStatusCode());
+    }
 
 }
