@@ -4,14 +4,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-    <include file="/changes/insert_into_USER.sql" relativeToChangelogFile="true"/>
-    <include file="/changes/create_users_table.sql" relativeToChangelogFile="true"/>
-
     <include file="changes/create_admin_users_table002.sql" relativeToChangelogFile="true"/>
     <include file="changes/alter_user_details_table.sql" relativeToChangelogFile="true"/>
-    <include file="changes/create_dropdown_table.sql" relativeToChangelogFile="true"/>
-    <include file="changes/insert_into_Nms_select.sql" relativeToChangelogFile="true"/>
-<!--    <include file="changes/alter_nmslist_table.sql" relativeToChangelogFile="true"/>-->
+    <include file="changes/user_option_table.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
 

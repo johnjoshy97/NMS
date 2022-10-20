@@ -1,1 +1,0 @@
---ALTER TABLE Nms_select ADD COLUMN createdAt, createBy, updateAt, updateBy;

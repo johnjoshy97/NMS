@@ -20,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -53,12 +54,10 @@ public class AuthController {
         return userDetails.addEmployee(userDetailsDto);
     }
 
-    @GetMapping(path = "/Listing")
-    public ResponseEntity<Response> insertOptions(@RequestBody ListOptionDto listOptionDto){
+    @GetMapping(path = "/listing/{label}")
+    public ResponseEntity<List<ListOptionDto>> insertOptions(@PathVariable String label){
 
-        Response response = listOptionService.insertOption(listOptionDto);
-
-        return new  ResponseEntity<>(response,response.getStatusCode());
+        return ResponseEntity.ok().body(listOptionService.insertOption(label));
     }
 
 }

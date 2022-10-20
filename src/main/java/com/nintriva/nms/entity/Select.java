@@ -12,17 +12,25 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Data
-@Table(name = "Nms_select")
+@Table(name = "nms_list")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Select {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int selectId;
+    @Column(name = "list_id")
+    private int listId;
     private String label;
     private String options;
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    @Column(name = "created_by")
+    private LocalDateTime createdBy;
+    @Column(name = "updated_by")
+    private LocalDateTime updatedBy;
+
 
 }

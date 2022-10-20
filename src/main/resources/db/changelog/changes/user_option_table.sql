@@ -1,6 +1,20 @@
-   ALTER TABLE Nms_select ALTER COLUMN selectid SET DEFAULT nextval('id_seq');
-    INSERT INTO Nms_select(label, options)
-    VALUES('Probation Status', 'Inprobation'),
+CREATE TABLE nms_list(
+list_id INT primary key,
+label VARCHAR(100) NOT NULL,
+options VARCHAR(100),
+created_at VARCHAR(100),
+ created_by VARCHAR(100),
+ updated_at VARCHAR(100),
+ updated_by VARCHAR(100)
+);
+
+CREATE SEQUENCE id_seq INCREMENT BY 1 START WITH 1 OWNED BY nms_list.list_id;
+
+ ALTER TABLE nms_list ALTER COLUMN list_id SET DEFAULT nextval('id_seq');
+
+
+    INSERT INTO nms_list(label, options)
+    VALUES('Probation Status', 'In probation'),
     ('Probation Status', 'Confirmed'),
     ('Gender', 'Male'),
     ('Gender', 'Female'),
@@ -34,7 +48,7 @@
     ('Designation', 'Manager HR'),
     ('Designation', 'Ui/Ux Designer'),
     ('Designation', 'Lead Ui/Ux Designer'),
-    ('Designation', 'Brand Marketing Executies'),
+    ('Designation', 'Brand Marketing Executives'),
     ('Designation', 'Copy Writer'),
     ('Designation', 'Senior Copy writer'),
     ('Designation', 'Business Analyst'),
@@ -46,7 +60,7 @@
     ('Department', 'Brand Marketing'),
     ('Department', 'Design Team'),
     ('Department', 'Project Management'),
-    ('Department', 'Business Deelopment'),
+    ('Department', 'Business Development'),
     ('Lie Status', 'Punch In'),
     ('Lie Status', 'Punch Out'),
     ('Employee status', 'Active'),
@@ -62,6 +76,8 @@
     ('Probation Period', '9'),
     ('Probation Period', '10'),
     ('Probation Period', '11'),
-    ('Probation Period', '12');
+    ('Probation Period', '12'),
+    ('Employee Code', 'NE'),
+    ('Employee Code', 'NT');
 
 

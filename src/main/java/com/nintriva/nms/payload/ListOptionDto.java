@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ListOptionDto {
 
-    private String Label;
-    private String Options;
+    private int listId;
+    private String options;
 }

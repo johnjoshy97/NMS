@@ -10,17 +10,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ListOptionServiceImpl implements ListOptionService {
 
     @Autowired
     private UserDropdownRepository userDropdownRepository;
+    @Override
+    public List<ListOptionDto> insertOption(String label) {
 
-    public Response insertOption(ListOptionDto listOptionDto){
+        List<ListOptionDto> options = userDropdownRepository.getOptions(label);
 
-        userDropdownRepository.ListOptions(listOptionDto.getLabel());
-
-        return Response.builder().success(true).message("option inserted").statusCode(HttpStatus.CREATED).data(listOptionDto.getLabel()).build();
+        return options;
     }
     }
 
