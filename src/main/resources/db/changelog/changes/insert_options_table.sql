@@ -1,0 +1,1 @@
+INSERT INTO nms_list(label, options) VALUES('Employment Type', 'Trainee');
